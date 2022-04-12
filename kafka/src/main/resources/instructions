@@ -1,0 +1,15 @@
+--start
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+--create topic
+.\bin\windows\kafka-topics.bat --create --topic TestTopic --bootstrap-server localhost:9092
+
+--list created topic
+.\bin\windows\kafka-topics.bat --list -zookeeper localhost:2181
+
+--create message
+.\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic TestTopic 
+
+--create consumer
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic TestTopic --from-beginning 
